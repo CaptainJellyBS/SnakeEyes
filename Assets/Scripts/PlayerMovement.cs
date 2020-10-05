@@ -30,8 +30,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug
         if(Input.GetKeyDown(KeyCode.K))
         {
-            GameObject newTail = Instantiate(tailPrefab);
-            successor.AddTail(newTail.GetComponent<FollowPredecessor>());
+            AddTail();
         }
     }
 
@@ -46,12 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (hit.collider.CompareTag("Ground")) 
             {
-
-                //Debug.Log(transform.position);
                 Vector3 direction = (new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position).normalized;
-                //Debug.Log(direction);
-                ////rb.MovePosition(transform.position + (direction * moveSpeed));
-
                 return direction;
             }
         }
@@ -71,5 +65,11 @@ public class PlayerMovement : MonoBehaviour
             successor.Move(oldPos);
             yield return new WaitForSeconds(moveTime);
         }        
+    }
+
+    public void AddTail()
+    {
+        GameObject newTail = Instantiate(tailPrefab);
+        successor.AddTail(newTail.GetComponent<FollowPredecessor>());
     }
 }
