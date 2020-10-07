@@ -6,9 +6,13 @@ public class Food : MonoBehaviour
 {
     Vector3 destination;
     public float speed;
+    public Color c;
+    bool correctFood;
+
     private void Start()
     {
         destination = new Vector3(Random.Range(-18, 18), 0.5f, Random.Range(-8, 8));
+        GetComponent<Renderer>().material.color = c;
     }
 
     private void Update()
