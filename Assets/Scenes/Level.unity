@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   moveTime: 0.25
+  deadZone: 2.5
   successor: {fileID: 691076268}
   tailPrefab: {fileID: 7987821477001512215, guid: 45aac420d6733714c8d1d3500445bf79, type: 3}
 --- !u!54 &167478524
@@ -833,7 +834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2217928038837402463, guid: 789ceadf622e06e42be801ca21397856, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.72
       objectReference: {fileID: 0}
     - target: {fileID: 2217928038837402463, guid: 789ceadf622e06e42be801ca21397856, type: 3}
       propertyPath: m_LocalPosition.y
@@ -841,7 +842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2217928038837402463, guid: 789ceadf622e06e42be801ca21397856, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.98
+      value: 5.23
       objectReference: {fileID: 0}
     - target: {fileID: 2217928038837402463, guid: 789ceadf622e06e42be801ca21397856, type: 3}
       propertyPath: m_LocalRotation.x

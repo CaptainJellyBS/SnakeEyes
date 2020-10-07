@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tobii.Gaming;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public float moveSpeed;
     public float moveTime;
+    public float deadZone;
     public static PlayerMovement Instance { get; private set; }
     public FollowPredecessor successor;
     public GameObject tailPrefab;
@@ -36,15 +38,14 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 CalculateDirection(Vector3 prevDir)
     {
-        Vector3 mousePos = Input.mousePosition;
-        //Camera.main.ScreenToWorldPoint(mousePos);
-        Ray r = Camera.main.ScreenPointToRay(mousePos);
+        GazePoint g = TobiiAPI.GetGazePoint();
+        Ray r = Camera.main.ScreenPointToRay(g.Screen);
         RaycastHit hit;
         if (Physics.Raycast(r, out hit))
         {
-
             if (hit.collider.CompareTag("Ground")) 
             {
+                if(Vector3.Distance(hit.point, transform.position) < deadZone) { return prevDir; }
                 Vector3 direction = (new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position).normalized;
                 return direction;
             }

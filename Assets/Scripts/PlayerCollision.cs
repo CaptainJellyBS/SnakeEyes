@@ -23,8 +23,8 @@ public class PlayerCollision : MonoBehaviour
         {
             GameController.Instance.score += 100;
             PlayerMovement.Instance.AddTail();
-            other.enabled = false; //Unity decided that sometimes we should collide with food twice before it gets destroyed. I disagree. Fuck you Unity.
-            Destroy(other.gameObject);
+            other.GetComponent<Food>().GetHit(); //Unity decided that sometimes we should collide with food twice before it gets destroyed. I disagree. Fuck you Unity.
+                                                 //Destroy(other.gameObject);
         }
     }
 
