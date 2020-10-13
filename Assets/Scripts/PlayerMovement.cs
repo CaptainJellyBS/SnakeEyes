@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Tobii.Gaming;
 using UnityEditor;
 using UnityEngine;
@@ -88,5 +89,30 @@ public class PlayerMovement : MonoBehaviour
     {
         GameObject newTail = Instantiate(tailPrefab);
         successor.AddTail(newTail.GetComponent<FollowPredecessor>());
+    }
+
+    public void NewColor()
+    {
+        // Build list of available colors
+        HashSet<Color> colors = new HashSet<Color>();
+        foreach (var food in FindObjectsOfType<Food>())
+        {
+            var col = food.GetComponent<Renderer>().material.color;
+            colors.Add(col);
+        }
+
+        // Remove current color, to make sure the color always changes
+        Color current = GetComponent<Renderer>().material.color;
+        colors.Remove(current);
+
+        // Check if color change is available
+        if (colors.Count == 0) {
+            return;
+        }
+
+        // Change to a random color
+        Color newColor = colors.ElementAt(Random.Range(0, colors.Count));
+        GetComponent<Renderer>().material.color = newColor;
+        successor.SetColor(newColor);
     }
 }

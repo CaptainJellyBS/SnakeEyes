@@ -25,6 +25,7 @@ public class PlayerCollision : MonoBehaviour
             PlayerMovement.Instance.AddTail();
             other.GetComponent<Food>().GetHit(); //Unity decided that sometimes we should collide with food twice before it gets destroyed. I disagree. Fuck you Unity.
                                                  //Destroy(other.gameObject);
+            PlayerMovement.Instance.NewColor();   
         }
     }
 

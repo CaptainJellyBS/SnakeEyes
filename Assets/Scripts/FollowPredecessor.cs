@@ -35,5 +35,14 @@ public class FollowPredecessor : MonoBehaviour
         successor = newTailBit;
         successor.transform.position = oldPos;
         successor.predecessor = this;
+        successor.SetColor(GetComponent<Renderer>().material.color);
+    }
+
+    public void SetColor(Color c) {
+        GetComponent<Renderer>().material.color = c;
+
+        if (successor) {
+            successor.SetColor(c);
+        }
     }
 }
