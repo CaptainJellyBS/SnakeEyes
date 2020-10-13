@@ -6,6 +6,22 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerCollision : MonoBehaviour
 {
+    public int lives = 3;
+
+    public int foodInterval;
+
+    public int foodRate;
+
+    private int intervalCtr;
+
+    void Start() {
+
+    }
+
+    void OnGUI() {
+        GUI.Label(new Rect(0,0,100,100), "Lives: " + lives.ToString());
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Snake"))
@@ -21,11 +37,29 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.CompareTag("Food"))
         {
-            GameController.Instance.score += 100;
-            PlayerMovement.Instance.AddTail();
             other.GetComponent<Food>().GetHit(); //Unity decided that sometimes we should collide with food twice before it gets destroyed. I disagree. Fuck you Unity.
-                                                 //Destroy(other.gameObject);
-            PlayerMovement.Instance.NewColor();   
+                                                    //Destroy(other.gameObject);
+            PlayerMovement.Instance.NewColor();
+
+            if (other.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color) {
+                GameController.Instance.score += 100;
+                PlayerMovement.Instance.AddTail();
+
+                intervalCtr++;
+                if (intervalCtr >= foodInterval) {
+                    for (int i=0; i<foodRate; i++) {
+                        Instantiate(other.gameObject).GetComponent<Food>().GetHit();
+                    }
+                    intervalCtr = 0;
+                }
+            } else {
+                lives--;
+
+                if (lives <= 0) {
+                    Debug.Log("You ded");
+                    StartCoroutine(Die());
+                }
+            }
         }
     }
 

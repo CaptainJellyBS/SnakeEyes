@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         StartCoroutine(Move());
+        NewColor();
     }
 
     // Update is called once per frame
