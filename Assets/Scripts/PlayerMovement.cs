@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float moveTime;
     public float deadZone;
+    public bool useTobii;
     public static PlayerMovement Instance { get; private set; }
     public FollowPredecessor successor;
     public GameObject tailPrefab;
@@ -17,6 +18,12 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        try {
+            useTobii = TobiiAPI.IsConnected;
+        } catch {
+            useTobii = false;
+        }
     }
 
     // Start is called before the first frame update
@@ -36,10 +43,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    Vector2 GetScreenPosition()
+    {
+        if (useTobii) {
+            return TobiiAPI.GetGazePoint().Screen;
+        } else {
+            return Input.mousePosition;
+        } 
+    }
+
     Vector3 CalculateDirection(Vector3 prevDir)
     {
-        GazePoint g = TobiiAPI.GetGazePoint();
-        Ray r = Camera.main.ScreenPointToRay(g.Screen);
+        Vector2 screenpoint = GetScreenPosition();
+        Ray r = Camera.main.ScreenPointToRay(screenpoint);
         RaycastHit hit;
         if (Physics.Raycast(r, out hit))
         {
