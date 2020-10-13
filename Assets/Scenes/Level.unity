@@ -238,6 +238,7 @@ MonoBehaviour:
   moveSpeed: 1
   moveTime: 0.25
   deadZone: 2.5
+  useTobii: 0
   successor: {fileID: 691076268}
   tailPrefab: {fileID: 7987821477001512215, guid: 45aac420d6733714c8d1d3500445bf79, type: 3}
 --- !u!54 &167478524
@@ -268,6 +269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96be77e70ec9a04189d534bc2364708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 3
+  foodInterval: 2
+  foodRate: 3
 --- !u!1 &215266468
 GameObject:
   m_ObjectHideFlags: 0
