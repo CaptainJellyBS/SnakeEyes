@@ -34,12 +34,15 @@ public class Food : MonoBehaviour
     }
     IEnumerator GetHitC()
     {
-        Collider c = GetComponent<Collider>();
-        c.enabled = false;
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = false;
         transform.position = new Vector3(Random.Range(-18, 18), 0.5f, Random.Range(-8, 8));
 
+        c = Random.ColorHSV();
+        GetComponent<Renderer>().material.color = c;
+
         yield return new WaitForSeconds(0.5f);
-        c.enabled = true;
+        collider.enabled = true;
 
     }
 }
