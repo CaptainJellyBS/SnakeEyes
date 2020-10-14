@@ -8,6 +8,7 @@ public class FollowPredecessor : MonoBehaviour
     public FollowPredecessor successor;
 
     public Vector3 oldPos;
+    public LinkedListNode<Vector3> location;
 
     void Start()
     {
@@ -15,13 +16,22 @@ public class FollowPredecessor : MonoBehaviour
         { predecessor.successor = this; }
     }
 
-    public void Move(Vector3 newPos)
+    public void Move()
     {
-        oldPos = transform.position;
-        transform.position = newPos;
+        location = location.Previous;
+        transform.position = location.Value;
         if (successor)
         {
-            successor.Move(oldPos);
+            successor.Move();
+        } else {
+            location.List.RemoveLast();
+        }
+    }
+
+    public void ExtendPath(Vector3 direction) {
+        float moveSpeed = FindObjectOfType<PlayerMovement>().moveSpeed;
+        for (float i=0; i<=1; i+=moveSpeed) {
+            location.List.AddLast(transform.position + direction * i);
         }
     }
 
@@ -32,8 +42,13 @@ public class FollowPredecessor : MonoBehaviour
             successor.AddTail(newTailBit);
             return;
         }
+
+        Vector3 dir = Vector3.Normalize(location.Value - location.Previous.Value);
+        ExtendPath(dir);
+
         successor = newTailBit;
-        successor.transform.position = oldPos;
+        successor.location = location.List.Last;
+        successor.transform.position = successor.location.Value;
         successor.predecessor = this;
         successor.SetColor(GetComponent<Renderer>().material.color);
     }

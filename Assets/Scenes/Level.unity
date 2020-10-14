@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8abd6adfeb79284abba80f1bac538df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  moveTime: 0.25
+  moveSpeed: 0.2
+  moveTime: 0.05
   deadZone: 2.5
   useTobii: 0
   successor: {fileID: 691076268}

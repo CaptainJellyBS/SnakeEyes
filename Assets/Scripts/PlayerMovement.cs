@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement Instance { get; private set; }
     public FollowPredecessor successor;
     public GameObject tailPrefab;
+    public LinkedList<Vector3> movement;
 
     private void Awake()
     {
@@ -30,6 +31,16 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        movement = new LinkedList<Vector3>();
+        movement.AddLast(transform.position);
+
+        successor.location = movement.Last;
+        successor.transform.position = transform.position;
+        successor.ExtendPath(Vector3.back);
+
+        successor.transform.position = successor.location.Value;
+        successor.location = movement.Last;
+        
         rb = GetComponent<Rigidbody>();
         StartCoroutine(Move());
         StartCoroutine(UglyColorFix());
@@ -84,10 +95,13 @@ public class PlayerMovement : MonoBehaviour
         while(true)
         {
             direction = CalculateDirection(direction);
-            Vector3 oldPos = transform.position;
-            transform.position += direction * moveSpeed;
-            transform.rotation = Quaternion.LookRotation(direction);
-            successor.Move(oldPos);
+            if (direction != Vector3.zero) {
+                Vector3 oldPos = transform.position;
+                transform.position += direction * moveSpeed;
+                transform.rotation = Quaternion.LookRotation(direction);
+                movement.AddFirst(transform.position);
+                successor.Move();
+            }
             yield return new WaitForSeconds(moveTime);
         }        
     }
