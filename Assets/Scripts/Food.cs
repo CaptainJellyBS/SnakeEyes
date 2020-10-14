@@ -33,14 +33,15 @@ public class Food : MonoBehaviour
         StartCoroutine(GetHitC());
     }
     IEnumerator GetHitC()
-    {
+    { 
         Collider collider = GetComponent<Collider>();
         collider.enabled = false;
         transform.position = new Vector3(Random.Range(-18, 18), 0.5f, Random.Range(-8, 8));
 
+        yield return null;
         //c = Random.ColorHSV();
-        GetComponent<Renderer>().material.color = GameController.Instance.GetRandomColor();
-
+        c = GameController.Instance.GetRandomColor();
+        GetComponent<Renderer>().material.color = c;
         yield return new WaitForSeconds(0.5f);
         collider.enabled = true;
 

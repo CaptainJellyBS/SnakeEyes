@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(UglyColorFix());
     }
 
-    IEnumerator UglyColorFix()
+    public IEnumerator UglyColorFix()
     {
         yield return null;
         NewColor();

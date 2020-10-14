@@ -38,10 +38,10 @@ public class PlayerCollision : MonoBehaviour
         if (other.CompareTag("Food"))
         {
             other.GetComponent<Food>().GetHit(); //Unity decided that sometimes we should collide with food twice before it gets destroyed. I disagree. Fuck you Unity.
-                                                    //Destroy(other.gameObject);
-            PlayerMovement.Instance.NewColor();
+                                                 //Destroy(other.gameObject);
+                                                 //PlayerMovement.Instance.NewColor();
 
-            if (other.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color) {
+            if (other.GetComponent<Food>().c == GetComponent<Renderer>().material.color) {
                 GameController.Instance.score += 100;
                 PlayerMovement.Instance.AddTail();
 
@@ -60,6 +60,8 @@ public class PlayerCollision : MonoBehaviour
                     StartCoroutine(Die());
                 }
             }
+
+            PlayerMovement.Instance.StartCoroutine(PlayerMovement.Instance.UglyColorFix());
         }
     }
 
