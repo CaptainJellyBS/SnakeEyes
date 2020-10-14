@@ -32,6 +32,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         StartCoroutine(Move());
+        StartCoroutine(UglyColorFix());
+    }
+
+    IEnumerator UglyColorFix()
+    {
+        yield return null;
         NewColor();
     }
 

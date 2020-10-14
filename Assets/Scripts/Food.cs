@@ -38,8 +38,8 @@ public class Food : MonoBehaviour
         collider.enabled = false;
         transform.position = new Vector3(Random.Range(-18, 18), 0.5f, Random.Range(-8, 8));
 
-        c = Random.ColorHSV();
-        GetComponent<Renderer>().material.color = c;
+        //c = Random.ColorHSV();
+        GetComponent<Renderer>().material.color = GameController.Instance.GetRandomColor();
 
         yield return new WaitForSeconds(0.5f);
         collider.enabled = true;
