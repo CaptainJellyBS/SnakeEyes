@@ -11,6 +11,7 @@ public class PlayerCollision : MonoBehaviour
     public int foodInterval;
 
     public int foodRate;
+    public bool selfCollision;
 
     private int intervalCtr;
 
@@ -24,7 +25,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Snake"))
+        if (collision.collider.CompareTag("Snake") && selfCollision)
         {
             if (collision.collider.gameObject == PlayerMovement.Instance.successor.gameObject) { return; } //Don't collide with the second tail part, to avoid insta dying. Kinda ugly, but works well enough for now.
             Debug.Log("You ded");
