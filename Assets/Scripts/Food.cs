@@ -8,6 +8,7 @@ public class Food : MonoBehaviour
     public float speed;
     public Color c;
     bool correctFood;
+    public float hiddenSize;
 
     private void Start()
     {
@@ -26,6 +27,24 @@ public class Food : MonoBehaviour
         }
         Vector3 dir = (destination - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
+
+        // Color shite
+        Vector2 screenpoint = FindObjectOfType<PlayerMovement>().GetScreenPosition();
+        Ray r = Camera.main.ScreenPointToRay(screenpoint);
+        RaycastHit hit;
+        if (Physics.Raycast(r, out hit))
+        {
+            if (hit.collider.CompareTag("Ground")) 
+            {
+                Material m = GetComponent<Renderer>().material;
+                Debug.Log(Vector3.Distance(hit.point, transform.position).ToString());
+                if (Vector3.Distance(hit.point, transform.position) < hiddenSize) {
+                    m.color = new Color(c.grayscale, c.grayscale, c.grayscale);
+                } else {
+                    m.color = c;
+                }
+            }
+        }
     }
 
     public void GetHit()

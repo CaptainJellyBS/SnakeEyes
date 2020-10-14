@@ -801,7 +801,6 @@ MonoBehaviour:
   - {r: 1, g: 0.5666981, b: 0, a: 0}
   - {r: 1, g: 0, b: 0.8072939, a: 0}
   - {r: 0, g: 1, b: 0.90622044, a: 0}
-  - {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &1959910151
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +903,10 @@ PrefabInstance:
     - target: {fileID: 3350857993655690558, guid: 789ceadf622e06e42be801ca21397856, type: 3}
       propertyPath: c.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350857993655690558, guid: 789ceadf622e06e42be801ca21397856, type: 3}
+      propertyPath: hiddenSize
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 789ceadf622e06e42be801ca21397856, type: 3}

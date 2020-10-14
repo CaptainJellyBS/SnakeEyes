@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    Vector2 GetScreenPosition()
+    public Vector2 GetScreenPosition()
     {
         if (useTobii) {
             return TobiiAPI.GetGazePoint().Screen;
@@ -104,8 +104,7 @@ public class PlayerMovement : MonoBehaviour
         HashSet<Color> colors = new HashSet<Color>();
         foreach (var food in FindObjectsOfType<Food>())
         {
-            var col = food.GetComponent<Renderer>().material.color;
-            colors.Add(col);
+            colors.Add(food.c);
         }
 
         // Remove current color, to make sure the color always changes
