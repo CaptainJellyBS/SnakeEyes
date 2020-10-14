@@ -37,7 +37,6 @@ public class Food : MonoBehaviour
             if (hit.collider.CompareTag("Ground")) 
             {
                 Material m = GetComponent<Renderer>().material;
-                Debug.Log(Vector3.Distance(hit.point, transform.position).ToString());
                 if (Vector3.Distance(hit.point, transform.position) < hiddenSize) {
                     m.color = new Color(c.grayscale, c.grayscale, c.grayscale);
                 } else {
