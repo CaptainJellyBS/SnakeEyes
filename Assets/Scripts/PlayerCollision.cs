@@ -29,7 +29,7 @@ public class PlayerCollision : MonoBehaviour
         {
             if (collision.collider.gameObject == PlayerMovement.Instance.successor.gameObject) { return; } //Don't collide with the second tail part, to avoid insta dying. Kinda ugly, but works well enough for now.
             Debug.Log("You ded");
-            StartCoroutine(Die());
+            Die();
         }
 
     }
@@ -59,7 +59,7 @@ public class PlayerCollision : MonoBehaviour
 
                 if (lives <= 0) {
                     Debug.Log("You ded");
-                    StartCoroutine(Die());
+                    Die();
                 }
             }
 
@@ -67,11 +67,9 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    IEnumerator Die()
+    void Die()
     {
-        PlayerMovement.Instance.moveTime = 900; //Ugly Shit
-        yield return new WaitForSeconds(1.0f); 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+        UIController.Instance.Die();
     }
- }
+}
 
