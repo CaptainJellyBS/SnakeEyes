@@ -20,7 +20,7 @@ public class PlayerCollision : MonoBehaviour
     }
 
     void OnGUI() {
-        GUI.Label(new Rect(0,0,100,100), "Lives: " + lives.ToString());
+        //GUI.Label(new Rect(0,0,100,100), "Lives: " + lives.ToString()); NEE
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,6 +55,7 @@ public class PlayerCollision : MonoBehaviour
                 }
             } else {
                 lives--;
+                UIController.Instance.SetLives(lives);
 
                 if (lives <= 0) {
                     Debug.Log("You ded");
